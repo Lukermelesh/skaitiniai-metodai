@@ -22,7 +22,6 @@ def main():
     print(i, ", [", a, ",", b, "] ,", get_error(a, b))
     while not is_within_error(a, b):
         i += 1
-        error = get_error(a, b)
         c = (b + a) / 2
         c_val = f(c)
         c_sign = c_val > 0
@@ -30,7 +29,7 @@ def main():
             a = c
         elif c_sign == b_sign:
             b = c
-        print(i, ", [", a, ",", b, "] ,", error)
+        print(i, ", [", a, ",", b, "] ,", get_error(a, b))
         if c_val == 0:
             return c
     return b
