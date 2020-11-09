@@ -13,7 +13,7 @@ def main():
 
 
     i = 0
-    a = 0
+    a = 0 # pasirenkame intervala, kuriame bus sprendinys pagal grafika graph-1.png
     b = 1
     a_sign = f(a) > 0
     b_sign = f(b) > 0
@@ -35,4 +35,4 @@ def main():
             return c
     return b
 
-print(main())
+print("RESULT", main())

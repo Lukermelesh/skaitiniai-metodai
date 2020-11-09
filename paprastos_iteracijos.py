@@ -4,7 +4,7 @@ def g(x):
     return np.exp(-x**2)/2
 
 epsilon = 0.000000001
-q = 0.5 #pasirenkame pagal isvestines g(x)' grafika
+q = 0.5 #pasirenkame pagal isvestines g(x)' grafika (graph-2.png)
 def get_error(x, x_prev):
     return np.absolute(x - x_prev)
 
