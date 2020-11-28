@@ -1,24 +1,20 @@
 import numpy as np
-import math
 
-def fill_matrix_symetric(matrix, fill_with):
-    fill_length = len(fill_with)
-    start_at = math.ceil((fill_length - 1) / 2)
-    matrix_size = len(matrix)
-    fill_with = fill_with.reshape(1, fill_length)
-    for i in range(0, matrix_size):
-        if i < start_at:
-            matrix[i:i+1, :i+start_at+1] = fill_with[:,start_at-i:]
-        elif i > matrix_size - start_at - 1:
-            from_end = i - (matrix_size - start_at - 1)
-            matrix[i:i+1, i-start_at:] = fill_with[:,:fill_length-from_end]
-        else:
-            matrix[i:i+1, i-start_at:i-start_at+fill_length] = fill_with
-
+def create_matrix(fill_with, n):
+    matrix = np.zeros((n, n))
+    print(matrix)
+    for i in range(0, len(fill_with)):
+        val = fill_with[i:i+1]
+        matrix += np.diag(val * (n - i), i) + np.diag(val * (n - i), -i) if i > 0 else np.diag(val * n)
     return matrix
 
+n = 10
+c = 1 / (n + 1)**2
 
+x0 = np.array([1]*n)
 
-matrix = np.zeros((10, 10))
-matrix = fill_matrix_symetric(matrix, np.array([1, -16, 30, -16, 1]))
+matrix = create_matrix([30, -16, 1], n)
 print(matrix)
+
+a = np.linalg.solve(matrix, x0)
+print(a)
