@@ -9,7 +9,7 @@ def create_matrix(fill_with, n):
         matrix += np.diag(val * (n - i), i) + np.diag(val * (n - i), -i) if i > 0 else np.diag(val * n)
     return matrix
 
-def choletsky(A):
+def cholesky(A):
     n = len(A)
     L = np.zeros((n, n))
     for i in range(0, n):
@@ -53,21 +53,24 @@ def f(x, c):
     n = len(x)
     res = np.array([0.]*n)
     for i in range(0, n):
-        res[i] = c + 2*(((x[i + 1] if i + 1 < n else 0) - (x[i - 1] if i > 0 else 0))**2)
+        res[i] = c + 2*((x[i + 1] if i + 1 < n else 0) - (x[i - 1] if i > 0 else 0))**2
     return res
 
 np.seterr('raise')
-n = 10
+n = 100
 c = 1 / (n + 1)**2
 epsilon = 0.01
 start = time.time()
 
-prev_x = x0 = np.array([.5]*n) # x0 pasirenkame vektoriu
+prev_x = np.array([.5]*n) # x0 pasirenkame vektoriu
 A = create_matrix([30, -16, 1], n)
-npres = np.linalg.solve(A, x0)
+npres = np.linalg.solve(A, prev_x)
 print(npres) #pasitikrinimui
+cholesky_start = time.time()
+L = cholesky(A)
+cholesky_end = time.time()
+print("Cholesky decomposition took:", cholesky_end - cholesky_start)
 while True:
-    L = choletsky(A)
     Y = solve(L, prev_x, False)
     x = solve(np.transpose(L), Y, True)
     error = get_error(x, prev_x)
@@ -77,6 +80,7 @@ while True:
         break
     else:
         prev_x = f(x, c)
+        # print("prev_x", prev_x)
 
 end = time.time()
-print("Time elapsed:", end - start)
+print("Total time:", end - start)
