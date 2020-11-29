@@ -57,15 +57,15 @@ def f(x, c):
     return res
 
 np.seterr('raise')
-n = 100
+n = 30
 c = 1 / (n + 1)**2
 epsilon = 0.01
 start = time.time()
 
 prev_x = np.array([.5]*n) # x0 pasirenkame vektoriu
 A = create_matrix([30, -16, 1], n)
-npres = np.linalg.solve(A, prev_x)
-print(npres) #pasitikrinimui
+# npres = np.linalg.solve(A, prev_x)
+# print(npres) #pasitikrinimui
 cholesky_start = time.time()
 L = cholesky(A)
 cholesky_end = time.time()
