@@ -8,10 +8,19 @@ n
 40      0.00787s
 80      0.04803s
 160     0.29582s
-1600    nesulaukiau
+1600    283.39170s
 
-F(X) rezultatas taip greitai auga kiekvienoje iteracijoje, kad gauname overflow exception'a todel apskaiciuoti sistemos, kurios n > ~30 neiseina.
-
+(pradinis vektorius sudarytas is labai mazu teigiamu skaiciu,
+priesingu atveju f(x) grazina per greitai augancius arba mazejancius vektorius
+ir greitai gauname overflow exception'a)
+Lygciu sprendimo laikas:
+n
+10      0.00051s
+20      0.00097s
+40      0.00277s
+80      0.00386s
+160     0.01380s
+1600    1.28492s
 
 uzdavinys 11
 seidel:
@@ -30,4 +39,4 @@ n
 40      0.00935s
 80      0.04152s
 160     0.31225s
-1600    nesulaukiau
+1600    294.48188s

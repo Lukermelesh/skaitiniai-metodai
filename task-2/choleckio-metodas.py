@@ -53,16 +53,16 @@ def f(x, c):
     n = len(x)
     res = np.array([0.]*n)
     for i in range(0, n):
-        res[i] = c + 2*((x[i + 1] if i + 1 < n else 0) - (x[i - 1] if i > 0 else 0))**2
+        res[i] = c + 2*(((x[i + 1] if i + 1 < n else 0) - (x[i - 1] if i > 0 else 0))**2)
     return res
 
 np.seterr('raise')
-n = 30
+n = 1600
 c = 1 / (n + 1)**2
 epsilon = 0.01
-start = time.time()
+t_start = time.time()
 
-prev_x = np.array([.5]*n) # x0 pasirenkame vektoriu
+prev_x = np.array([.0000000001]*n) # x0 pasirenkame vektoriu
 A = create_matrix([30, -16, 1], n)
 # npres = np.linalg.solve(A, prev_x)
 # print(npres) #pasitikrinimui
@@ -70,6 +70,7 @@ cholesky_start = time.time()
 L = cholesky(A)
 cholesky_end = time.time()
 print("Cholesky decomposition took:", cholesky_end - cholesky_start)
+start = time.time()
 while True:
     Y = solve(L, prev_x, False)
     x = solve(np.transpose(L), Y, True)
@@ -82,5 +83,6 @@ while True:
         prev_x = f(x, c)
         # print("prev_x", prev_x)
 
-end = time.time()
-print("Total time:", end - start)
+end = t_end = time.time()
+print("Solving time:", end - start)
+print("Total time elapsed:", t_end - t_start)
